@@ -1,0 +1,9 @@
+## Interface: 11302
+## Title: ClassicR14_SA
+## Notes: Classic PVP Sound Alerts
+## Author: Shrugtal
+## SavedVariables: ClassicR14_SAConfig
+## Version: 0.1
+
+data.lua
+main.lua
