@@ -35,7 +35,7 @@ function namespace:GetSpellList()
 			["Adrenaline Rush"] = {1, ""},
 			-- warlock
 			["Sacrifice"] = {1, ""},
-			["Soulstone Ressurection"] = {1, ""},
+			["Soulstone Resurrection"] = {1, ""},
 			["Demonic Sacrifice"] = {1, ""},
 			-- warrior
 			["Shield Wall"] = {1, ""},
