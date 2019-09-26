@@ -34,7 +34,6 @@ function addon:PLAYER_LOGIN()
     self:UnregisterEvent("PLAYER_LOGIN")
 	
     self.PLAYER_LOGIN = nil
-	print("Player logged in")
 end
 
 function addon:ADDON_LOADED()
@@ -44,7 +43,7 @@ function addon:ADDON_LOADED()
 		self.spellList = GetSpellList("ClassicR14_SA Alpha Loaded!")
 	end
 	namespace.GetOptionsFrame("ClassicR14_SA Alpha Loaded!")
-	print("ClassicR14_SA Alpha Loaded!")
+	print("ClassicR14_SA Alpha Loaded! Please report any bugs or suggestions to |cffF08CE0https://github.com/Shrugtal/ClassicR14_SA/issues")
 end
 
 function addon:HandleSpell(eventType, spellName, ...)
@@ -67,9 +66,9 @@ function addon:RequestSound(spellName, fading, altName)
 		realName = altName
 	end
 	if fading then
-		PlaySoundFile("Interface\\AddOns\\ClassicR14_SA\\audio\\" .. realName .. "down.mp3");
+		PlaySoundFile("Interface\\AddOns\\ClassicR14_SA\\audio\\" .. realName .. "down.mp3", "Master");
 	else
-		PlaySoundFile("Interface\\AddOns\\ClassicR14_SA\\audio\\" .. realName .. ".mp3");
+		PlaySoundFile("Interface\\AddOns\\ClassicR14_SA\\audio\\" .. realName .. ".mp3", "Master");
 	end
 end
 
@@ -91,13 +90,13 @@ function addon:COMBAT_LOG_EVENT_UNFILTERED()
 			end
 		elseif isFriendly then
 			if eventType == "SPELL_CAST_START" then
-				self:HandleSpell("castStart", spellName);
+			--	self:HandleSpell("castStart", spellName); --DEBUG
 			elseif eventType == "SPELL_CAST_SUCCESS" then
-				self:HandleSpell("castSuccess", spellName);
+			--	self:HandleSpell("castSuccess", spellName); --DEBUG
 			elseif eventType == "SPELL_AURA_APPLIED" then
-				self:HandleSpell("auraApplied", spellName);
+			--	self:HandleSpell("auraApplied", spellName); --DEBUG
 			elseif eventType == "SPELL_AURA_REMOVED" then	
-				self:HandleSpell("auraRemoved", spellName);	
+			--	self:HandleSpell("auraRemoved", spellName);	 --DEBUG
 			end
 		end
 	end

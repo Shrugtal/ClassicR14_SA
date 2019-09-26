@@ -4,6 +4,8 @@ function namespace:GetSpellList()
 	local list = {
 		auraApplied = {
 			-- gen
+			["Invulnerability"] = {1, "Limited Invulnerability Potion"},
+			["Free Action"] = {1, "Free Action Potion"},
 			-- druid
 			["Barkskin"] = {1, ""},
 			["Nature's Grasp"] = {1, ""},
@@ -26,11 +28,14 @@ function namespace:GetSpellList()
 			["Fear Ward"] = {1, ""},
 			["Power Word: Shield"] = {1, "Power Word Shield"},
 			["Power Infusion"] = {1, ""},
+			["Inner Focus"] = {1, ""},
 			-- rogue
+			["Stealth"] = {1, ""},
 			["Evasion"] = {1, ""},
 			["Adrenaline Rush"] = {1, ""},
 			-- warlock
 			["Sacrifice"] = {1, ""},
+			["Soulstone Ressurection"] = {1, ""},
 			["Demonic Sacrifice"] = {1, ""},
 			-- warrior
 			["Shield Wall"] = {1, ""},
@@ -52,6 +57,8 @@ function namespace:GetSpellList()
 		castStart = {
 			-- gen
 			["Escape Artist"] = {1, ""},
+			["Cannabalize"] = {1, ""},
+			["Hearthstone"] = {1, ""},
 			-- big heals
 			["Heal"] = {1,  "Big Heal"},
 			["Greater Heal"] = {1,  "Big Heal"},
@@ -65,6 +72,7 @@ function namespace:GetSpellList()
 			["Ancestral Spirit"] = {1, "Resurrection"},
 			-- druid
 			["Entangling Roots"] = {1, ""},
+			["Hibernate"] = {1, ""},
 			["Tranquility"] = {1, ""},
 			-- hunter
 			["Revive Pet"] = {1, ""},
@@ -102,9 +110,13 @@ function namespace:GetSpellList()
 			["Will of the Forsaken"] = {1, ""},
 			["Insignia of the Alliance"] = {1, "Trinket"},
 			["Insignia of the Horde"] = {1, "Trinket"},
+			--potions
+			["Restore Mana"] = {1, ""},
+			["Healing Potion"] = {1, ""},
 			-- druid
 			["Bash"] = {1, ""},
 			["Feral Charge"] = {1, ""},
+			["Dash"] = {1, ""},
 			-- hunter
 			["Freezing Trap"] = {1, ""},
 			["Scatter Shot"] = {1, ""},
@@ -135,7 +147,7 @@ function namespace:GetSpellList()
 			["Cold Blood"] = {1, ""},
 			["Vanish"] = {1, ""},
 			["Blind"] = {1, ""},
-			["Preperation"] = {1, ""},
+			["Preparation"] = {1, ""},
 			["Kick"] = {1, ""},
 			["Sprint"] = {1, ""},
 			-- warlock
@@ -154,7 +166,9 @@ function namespace:GetSpellList()
 	}
 	for category, pair in pairs(ClassicR14_SAConfig) do
 		for spell, value in pairs(pair) do
-			list[category][spell][1] = value
+			if list[category][spell] ~= nil then
+				list[category][spell][1] = value
+			end
 		end
 	end
 	return list;

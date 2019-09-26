@@ -98,7 +98,7 @@ function GenerateSpellOptionsForCategory (categoryFrame, key)
 		end
 		checkBtn:SetScript("OnClick", 
 		function()
-			PlaySoundFile("Interface\\AddOns\\ClassicR14_SA\\audio\\" .. spellName .. ".mp3")
+			PlaySoundFile("Interface\\AddOns\\ClassicR14_SA\\audio\\" .. spellName .. ".mp3", "Master")
 			if checkBtn:GetChecked() == true then
 				if ClassicR14_SAConfig[key] == nil then
 					ClassicR14_SAConfig[key] = {}
