@@ -1,6 +1,7 @@
 local _, namespace = ...
-function namespace:GetSpellList ()
-	return {
+function namespace:GetSpellList()
+	
+	local list = {
 		auraApplied = {
 			-- gen
 			-- druid
@@ -37,14 +38,16 @@ function namespace:GetSpellList ()
 			["Recklessness"] = {1, ""},
 		},
 		auraRemoved = {
-			["Ice Block"] = {1, ""},
-			["Divine Shield"] = {1, ""},
-			["Blessing of Protection"] = {1, ""},
-			["Evasion"] = {1, ""},
-			["Shield Wall"] = {1, ""},
-			["Retaliation"] = {1, ""},
-			["Recklessness"] = {1, ""},
-			["Deterrence"] = {1, ""},
+			["Ice Block"] = {1, "Ice Block down"},
+			["Divine Shield"] = {1, "Bubble down"},
+			["Blessing of Protection"] = {1, "Bubble down"},
+			["Divine Intervention"] = {1, "Bubble down"},
+			["Divine Protection"] = {1, "Bubble down"},
+			["Evasion"] = {1, "Evasion down"},
+			["Shield Wall"] = {1, "Shield Wall down"},
+			["Retaliation"] = {1, "Retaliation down"},
+			["Recklessness"] = {1, "Recklessness down"},
+			["Deterrence"] = {1, "Deterrence down"},
 		},
 		castStart = {
 			-- gen
@@ -56,10 +59,10 @@ function namespace:GetSpellList ()
 			["Healing Touch"] = {1,  "Big Heal"},
 			["Healing Wave"] = {1,  "Big Heal"},
 			-- resurrection
-			["Resurrection"] = {1, ""},
-			["Redemption"] = {1, ""},
-			["Rebirth"] = {1, ""}, --combat res
-			["Ancestral Spirit"] = {1, ""},
+			["Resurrection"] = {1, "Resurrection"},
+			["Redemption"] = {1, "Resurrection"},
+			["Rebirth"] = {1, "Resurrection"}, --combat res
+			["Ancestral Spirit"] = {1, "Resurrection"},
 			-- druid
 			["Entangling Roots"] = {1, ""},
 			["Tranquility"] = {1, ""},
@@ -84,10 +87,10 @@ function namespace:GetSpellList ()
 			["Banish"] = {1, ""},
 			["Howl of Terror"] = {1, ""},
 			["Seduction"] = {1, ""},
-			["Summon Imp"] = {1, ""},
-			["Summon Felhunter"] = {1, ""},
-			["Summon Succubus"] = {1, ""},
-			["Summon Voidwalker"] = {1, ""},
+			["Summon Imp"] = {1, "Summon Demon"},
+			["Summon Felhunter"] = {1, "Summon Demon"},
+			["Summon Succubus"] = {1, "Summon Demon"},
+			["Summon Voidwalker"] = {1, "Summon Demon"},
 			["Inferno"] = {1, ""},
 			-- warrior
 		},
@@ -97,8 +100,8 @@ function namespace:GetSpellList ()
 			["Shadowmeld"] = {1, ""},
 			["Stoneform"] = {1, ""},
 			["Will of the Forsaken"] = {1, ""},
-			["Insignia of the Alliance"] = {1, ""},
-			["Insignia of the Horde"] = {1, ""},
+			["Insignia of the Alliance"] = {1, "Trinket"},
+			["Insignia of the Horde"] = {1, "Trinket"},
 			-- druid
 			["Bash"] = {1, ""},
 			["Feral Charge"] = {1, ""},
@@ -149,4 +152,10 @@ function namespace:GetSpellList ()
 			["Death Wish"] = {1, ""},
 		},
 	}
+	for category, pair in pairs(ClassicR14_SAConfig) do
+		for spell, value in pairs(pair) do
+			list[category][spell][1] = value
+		end
+	end
+	return list;
 end

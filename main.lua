@@ -1,9 +1,8 @@
-print("ClassicR14_SA Alpha Loaded!")
-
 local _, namespace = ...
 local addon = CreateFrame("Frame")
 
 addon:RegisterEvent("PLAYER_LOGIN")
+addon:RegisterEvent("ADDON_LOADED")
 addon:SetScript("OnEvent", function(self, event, ...)
     -- this will basically trigger addon:EVENT_NAME(arguments) on any event happening
     return self[event](self, ...)
@@ -14,15 +13,22 @@ local COMBATLOG_OBJECT_TYPE_PLAYER_OR_PET = _G.COMBATLOG_OBJECT_TYPE_PLAYER + _G
 local COMBATLOG_OBJECT_REACTION_FRIENDLY = _G.COMBATLOG_OBJECT_REACTION_FRIENDLY
 local COMBATLOG_OBJECT_REACTION_HOSTILE = _G.COMBATLOG_OBJECT_REACTION_HOSTILE
 local GetSpellList = namespace.GetSpellList
-local GetOptionsMenu = namespace.GetOptionsMenu
+local GetOptionsFrame = namespace.GetOptionsFrame
 local bit_band = _G.bit.band
 local PlaySoundFile = _G.PlaySoundFile
+local defaults = {
+    auraApplied = {
+	},
+	castSuccess = {
+	},
+	castStart = {
+	},
+	auraRemoved = {
+	},
+}
 -- local variable storage end
 
 function addon:PLAYER_LOGIN()
-	if not self.spellList then
-		self.spellList = GetSpellList()
-	end
     self.PLAYER_GUID = UnitGUID("player")
     self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
     self:UnregisterEvent("PLAYER_LOGIN")
@@ -31,7 +37,18 @@ function addon:PLAYER_LOGIN()
 	print("Player logged in")
 end
 
+function addon:ADDON_LOADED()
+	self:UnregisterEvent("ADDON_LOADED")
+	ClassicR14_SAConfig = ClassicR14_SAConfig or defaults
+	if not self.spellList then
+		self.spellList = GetSpellList("ClassicR14_SA Alpha Loaded!")
+	end
+	namespace.GetOptionsFrame("ClassicR14_SA Alpha Loaded!")
+	print("ClassicR14_SA Alpha Loaded!")
+end
+
 function addon:HandleSpell(eventType, spellName, ...)
+  --  ClassicR14_SAConfig.variable = ClassicR14_SAConfig.variable + 1
 	local fading = false
 	local result = self.spellList[eventType][spellName]
 	if eventType == "auraRemoved" then
@@ -50,9 +67,9 @@ function addon:RequestSound(spellName, fading, altName)
 		realName = altName
 	end
 	if fading then
-		PlaySoundFile("Interface\\AddOns\\ClassicR14_SA\\audio\\" .. realName .. "down.mp3", "Master");
+		PlaySoundFile("Interface\\AddOns\\ClassicR14_SA\\audio\\" .. realName .. "down.mp3");
 	else
-		PlaySoundFile("Interface\\AddOns\\ClassicR14_SA\\audio\\" .. realName .. ".mp3", "Master");
+		PlaySoundFile("Interface\\AddOns\\ClassicR14_SA\\audio\\" .. realName .. ".mp3");
 	end
 end
 
