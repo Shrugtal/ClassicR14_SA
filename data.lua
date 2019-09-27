@@ -3,11 +3,18 @@ function namespace:GetSpellList()
 	
 	local list = {
 		auraApplied = {
-			-- gen
+			-- potions
 			["Invulnerability"] = {1, "Limited Invulnerability Potion"},
 			["Free Action"] = {1, "Free Action Potion"},
+			-- items
+			["Fire Reflector"] = {1, ""},
+			["Ice Reflector"] = {1, ""},
+			["Shadow Reflector"] = {1, ""},
+			-- racial
+			["Blood Fury"] = {1, ""},
 			-- druid
 			["Barkskin"] = {1, ""},
+			["Frenzied Regeneration"] = {1, ""},
 			["Nature's Grasp"] = {1, ""},
 			["Innervate"] = {1, ""},
 			-- hunter
@@ -33,11 +40,16 @@ function namespace:GetSpellList()
 			["Stealth"] = {1, ""},
 			["Evasion"] = {1, ""},
 			["Adrenaline Rush"] = {1, ""},
+			-- shaman
+			["Elemental Mastery"] = {1, ""},
 			-- warlock
 			["Sacrifice"] = {1, ""},
 			["Soulstone Resurrection"] = {1, ""},
 			["Demonic Sacrifice"] = {1, ""},
+			["Fel Domination"] = {1, ""},
 			-- warrior
+			["Death Wish"] = {1, ""},
+			["Improved Hamstring"] = {1, "", true},
 			["Shield Wall"] = {1, ""},
 			["Retaliation"] = {1, ""},
 			["Recklessness"] = {1, ""},
@@ -76,6 +88,7 @@ function namespace:GetSpellList()
 			["Tranquility"] = {1, ""},
 			-- hunter
 			["Revive Pet"] = {1, ""},
+			["Aimed Shot"] = {1, ""},
 			["Bestial Wrath"] = {1, ""},
 			["Wyvern Sting"] = {1, ""},
 			["Scatter Shot"] = {1, ""},
@@ -89,6 +102,7 @@ function namespace:GetSpellList()
 			-- priest
 			["Mind Control"] = {1, ""},
 			-- shaman
+			["Astral Recall"] = {1, "Hearthstone"},
 			-- rogue
 			-- warlock
 			["Fear"] = {1, ""},
@@ -119,6 +133,7 @@ function namespace:GetSpellList()
 			["Dash"] = {1, ""},
 			-- hunter
 			["Freezing Trap"] = {1, ""},
+			["Readiness"] = {1, ""},
 			["Scatter Shot"] = {1, ""},
 			["Intimidation"] = {1, ""},
 			-- mage
@@ -161,7 +176,6 @@ function namespace:GetSpellList()
 			["Pummel"] = {1, ""},
 			["Shield Bash"] = {1, ""},
 			["Concussion Blow"] = {1, ""},
-			["Death Wish"] = {1, ""},
 		},
 	}
 	for category, pair in pairs(ClassicR14_SAConfig) do
@@ -171,5 +185,5 @@ function namespace:GetSpellList()
 			end
 		end
 	end
-	return list;
+	namespace.spellList = list;
 end

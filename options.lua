@@ -83,9 +83,8 @@ function namespace:GetOptionsFrame()
 end
 
 function GenerateSpellOptionsForCategory (categoryFrame, key)
-	local array = GetSpellList()
 	local pos = -16
-	for spell, pair in orderedPairs(array[key]) do
+	for spell, pair in orderedPairs(namespace.spellList[key]) do
 		local spellName = spell
 		local checkBtn = CreateFrame("CheckButton", "cb", categoryFrame, "UICheckButtonTemplate");
 		checkBtn:SetPoint("TOPLEFT", 0, pos);
@@ -104,11 +103,13 @@ function GenerateSpellOptionsForCategory (categoryFrame, key)
 					ClassicR14_SAConfig[key] = {}
 				end
 				ClassicR14_SAConfig[key][spell] = 1
+				GetSpellList()
 			else
 				if ClassicR14_SAConfig[key] == nil then
 					ClassicR14_SAConfig[key] = {}
 				end
 				ClassicR14_SAConfig[key][spell] = 0
+				GetSpellList()
 			end
 		end)
 		pos = pos - 24
@@ -136,7 +137,6 @@ function orderedNext(t, state)
     -- table being iterated.
 
     local key = nil
-    --print("orderedNext: state = "..tostring(state) )
     if state == nil then
         -- the first time, generate the index
         t.__orderedIndex = __genOrderedIndex( t )
@@ -151,7 +151,6 @@ function orderedNext(t, state)
     end
 
     if key then
-		print(key)
         return key, t[key]
     end
 

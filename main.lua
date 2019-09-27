@@ -39,8 +39,8 @@ end
 function addon:ADDON_LOADED()
 	self:UnregisterEvent("ADDON_LOADED")
 	ClassicR14_SAConfig = ClassicR14_SAConfig or defaults
-	if not self.spellList then
-		self.spellList = GetSpellList("ClassicR14_SA Alpha Loaded!")
+	if not namespace.spellList then
+		GetSpellList()
 	end
 	namespace.GetOptionsFrame("ClassicR14_SA Alpha Loaded!")
 	print("ClassicR14_SA Alpha Loaded! Please report any bugs or suggestions to |cffF08CE0https://github.com/Shrugtal/ClassicR14_SA/issues")
@@ -49,14 +49,25 @@ end
 function addon:HandleSpell(eventType, spellName, ...)
   --  ClassicR14_SAConfig.variable = ClassicR14_SAConfig.variable + 1
 	local fading = false
-	local result = self.spellList[eventType][spellName]
+	local me = false
 	if eventType == "auraRemoved" then
 		fading = true
 	end
+	if eventType == "auraAppliedSelf" then
+		eventType = "auraApplied"
+		me = true
+	end
+	local result = namespace.spellList[eventType][spellName]
 	if result then
-		if result[1] == 1 then
+		if result[1] == 1 and me == true and result[3] ~= nil then
+			if result[3] == true then
+				self:RequestSound(spellName, fading, result[2])
+			end
+		elseif result[1] == 1 and result[3] == nil and me == false then
 			self:RequestSound(spellName, fading, result[2])
+		else 
 		end
+		
 	end
 end
 
@@ -94,7 +105,7 @@ function addon:COMBAT_LOG_EVENT_UNFILTERED()
 			elseif eventType == "SPELL_CAST_SUCCESS" then
 			--	self:HandleSpell("castSuccess", spellName); --DEBUG
 			elseif eventType == "SPELL_AURA_APPLIED" then
-			--	self:HandleSpell("auraApplied", spellName); --DEBUG
+			self:HandleSpell("auraAppliedSelf", spellName); --DEBUG
 			elseif eventType == "SPELL_AURA_REMOVED" then	
 			--	self:HandleSpell("auraRemoved", spellName);	 --DEBUG
 			end
